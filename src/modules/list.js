@@ -1,48 +1,69 @@
-import { createAction, handleActions } from "redux-actions";
+import { createAction, handleActions } from 'redux-actions';
 
 // //리스트 액션 타입 설정
 
-const INSERTLIST = "app/INSERTLIST";
-const INSERTCARD = "app/INSERTCARD";
+const INSERTLIST = 'todobutton/INSERTLIST';
+const INSERTCARD = 'todobutton/INSERTCARD';
+const CHANGECARD = 'todocard/CHANGECARD';
 
 //액션 생성해주고
 
 export const insertList = createAction(INSERTLIST);
-export const insertCard = createAction(INSERTCARD, (text) => ({
-  id: cardID++,
-  text,
-}));
+export const insertCard = createAction(INSERTCARD);
+export const changecard = createAction(CHANGECARD);
+// export const insertCard = createAction(INSERTCARD, text => {
+//   console.log('insertCArd', text)
+//   return {
+//     id: cardID++,
+//     text,
+//   };
+// });
 
-let listID = 2;
+let listID = 3;
 let cardID = 2;
+
 
 //초기값만들고
 const initialState = [
   {
-    title: "할 일",
+    title: 'ToDo', 
     id: 0,
     cards: [
       {
         id: 0,
-        text: "리덕",
+        text: '쓰레기 차우기',
       },
       {
         id: 1,
-        text: "스",
+        text: '물병 닦기',
       },
     ],
   },
   {
-    title: "하는 중",
+    title: 'Doing',
     id: 1,
     cards: [
       {
         id: 0,
-        text: "흑흑",
+        text: '리덕스를하자',
       },
       {
         id: 1,
-        text: "허어어엉",
+        text: '함수만들자',
+      },
+    ],
+  },
+  {
+    title: 'Done',
+    id: 2,
+    cards: [
+      {
+        id: 0,
+        text: '저녁 메뉴',
+      },
+      {
+        id: 1,
+        text: '핸드크림',
       },
     ],
   },
@@ -52,15 +73,33 @@ const initialState = [
 
 export default handleActions(
   {
-    // [INSERTLIST]: (state, action) => {
-    //   const newList = {
-    //     title: action.payload,
-    //     card: [],
-    //     id: listID,
-    //   };
-    //   listID += 1;
-    //   return [...state, newList];
-    // },
+  //   [INSERTLIST]: (state, action) => {
+  //     const newList = {
+  //       title: action.payload,
+  //       card: [],
+  //       id: listID,
+  //     };
+  //     listID += 1;
+  //     return [...state, newList];
+  //   },
+    [CHANGECARD]: (state,action) => {
+      const changeList = {
+        title: '',
+        card: [],
+        id:listID,
+      };
+      listID +=1;
+
+      const newChange = state.map(card => {
+        if(card.listID !== action.payload.listID){
+          //카드의 listID를 바꿔줘라
+        }else{
+          return card;
+        }
+      });
+      return newChange;
+      
+    },
 
     //액션페이로드정해주고
     [INSERTCARD]: (state, action) => {
@@ -72,7 +111,7 @@ export default handleActions(
       cardID += 1;
 
       //초기값 돌면서 list.id가 액션들어온 listID랑 동일하면 넣어준드아아아
-      const newState = state.map((list) => {
+      const newState = state.map(list => {
         if (list.id === action.payload.listID) {
           return {
             ...list,
@@ -87,13 +126,11 @@ export default handleActions(
     },
   },
   initialState
+
 );
 
-// const listsReducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     default:
-//       return state;
-//   }
-// };
 
-// export default listsReducer;
+
+//상태 변경 함수가 필요하다
+//그걸 리스트 함수로 만들어주기 
+
