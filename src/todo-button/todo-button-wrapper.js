@@ -21,7 +21,7 @@ function TodoButton({ setOpen, listID }) {
     setText(e.currentTarget.value);
   };
 
-  //여기서 ListID를 빼주는 게 관건이었다 
+  //여기서 ListID를 빼주는 게 관건이었다...
   const handleinsertCard = text => {
     console.log('text', listID, text);
     if (text) {

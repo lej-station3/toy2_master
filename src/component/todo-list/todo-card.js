@@ -31,7 +31,7 @@ const Card = styled.div`
 
 function TodoCard({ text }) {
   const [open, setOpen] = useState(true);
-  const [selectType, selectSetType] = useState(['Doing', 'Done']);
+  const [selectType, selectSetType] = useState(['Todo','Doing', 'Done']);
   const Type = selectType.map(type => type);
 
   const handleChange = e => {

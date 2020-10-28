@@ -11,13 +11,7 @@ const CHANGECARD = 'todocard/CHANGECARD';
 export const insertList = createAction(INSERTLIST);
 export const insertCard = createAction(INSERTCARD);
 export const changecard = createAction(CHANGECARD);
-// export const insertCard = createAction(INSERTCARD, text => {
-//   console.log('insertCArd', text)
-//   return {
-//     id: cardID++,
-//     text,
-//   };
-// });
+
 
 let listID = 3;
 let cardID = 2;
