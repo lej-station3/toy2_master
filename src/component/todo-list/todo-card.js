@@ -1,36 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { lighten } from 'polished';
 import produce from 'immer';
-import styled from 'styled-components';
+import { Card,Select } from './card-styled.js';
+
 
 import { ReactComponent as SwapSvg } from './images/swap.svg';
 import { changeList } from '../../modules/list';
 
-const Card = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 300px;
-  margin-bottom: 7px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #8C2703;
-  &:hover{
-    background-color: ${lighten('0.1', '#8C2703')} ;
-  }
-  h5{
-    margin-left:30px;
-    color: #fff;
-  }
-  .icon{
-    margin-left:10px;
-    opacity:0;
-    &:hover{
-    opacity:1;
-    }
-  }
-`;
+
 
 function TodoCard({ card,listID }) {
   const { list } = useSelector(state => state);
@@ -58,7 +35,7 @@ function TodoCard({ card,listID }) {
     console.log(nextState);
     dispatch(changeList(nextState));
   };
-  
+
 
   return (
     <Card>
@@ -67,16 +44,17 @@ function TodoCard({ card,listID }) {
         {open ? (
           <SwapSvg onClick={() => setOpen(false)} width="25" />) :
           //여기서 listID가 들어가면 안되는거임 
-          <select value={listID} onChange={e => ChangeType(card.id, +e.currentTarget.value)}>
-          
-            {list.map(item => {
-              return(
-                <option key={item.id} value={item.id}>
-                  {item.title}
-                </option>
-              );
-            })}
-          </select>
+          <Select>
+            <select value={listID} onChange={e => ChangeType(card.id, +e.currentTarget.value)}>
+              {list.map(item => {
+                return(
+                  <option key={item.id} value={item.id}>
+                    {item.title}
+                  </option>
+                );
+              })}
+            </select>          
+          </Select>
         }
       </span>
     </Card>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TodoCard from './todo-card';
-import TodoButtonWrapper from '../../todo-button/todo-button-wrapper';
+import TodoButtonWrapper from '../todo-button/todo-button-wrapper';
 import styled from 'styled-components';
 
 
@@ -11,7 +11,6 @@ const List = styled.div`
   background-color: #BF8563;
   border-radius: 10px;
   h5{
-
   font-weight: 600;
   text-align: center;
   font-size: 16px;

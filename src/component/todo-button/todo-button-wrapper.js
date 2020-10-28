@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { insertCard } from '../modules/list';
+import { insertCard } from '../../modules/list';
 import { Button,InputSet,ButtonWrapper } from './styled.js';
 
 
@@ -35,8 +35,8 @@ function TodoButton({ setOpen, listID }) {
     <InputSet>
       <textarea onChange={handleChange} value={text} />
       <ButtonWrapper>
-        <button onClick= {handleEnter}>+</button>
-        <button onClick= {() => setOpen(false)}>x</button>
+        <button onClick={handleEnter}>+</button>
+        <button onClick={() => setOpen(false)}>x</button>
       </ButtonWrapper>
     
     </InputSet>
@@ -51,9 +51,9 @@ function TodoButtonWrapper({ listID }) {
   return (
     <Button>
       {open ? (
-        <TodoButton listID= {listID} setOpen={setOpen} />
+        <TodoButton listID={listID} setOpen={setOpen} />
       ) : (
-        <p onClick= {() => setOpen(!open)}>Add a Card</p>
+        <p onClick={() => setOpen(!open)}>Add a Card</p>
       )}
     </Button>
   );

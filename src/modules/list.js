@@ -74,33 +74,30 @@ export default handleActions(
       return action.payload;
     },
     
-  //   [INSERTCARD]: (state, action) => {
-  //     console.warn(action);
-  //     const newCard = {
-  //       id: cardID,
-  //       text: action.payload.text,
-  //     };
-  //     cardID += 1;
+    [INSERTCARD]: (state, action) => {
+      console.warn(action);
+      const newCard = {
+        id: cardID,
+        text: action.payload.text,
+      };
+      cardID += 1;
 
-  //     //초기값 돌면서 list.id가 액션들어온 listID랑 동일하면 넣어준드아아아
-  //     const newState = state.map(list => {
-  //       if (list.id === action.payload.listID) {
-  //         return {
-  //           ...list,
-  //           //기존 카드 뒤에 새로운 카드를 붙여라
-  //           cards: [...list.cards, newCard],
-  //         };
-  //       } else {
-  //         return list;
-  //       }
-  //     });
-  //     return newState;
-  //   },
-  // },
-  [INSERTCARD] : (state,action) => {
-    const newState = 
-  }
-    
+      //초기값 돌면서 list.id가 액션들어온 listID랑 동일하면 넣어준드아아아
+      const newState = state.map(list => {
+        if (list.id === action.payload.listID) {
+          return {
+            ...list,
+            //기존 카드 뒤에 새로운 카드를 붙여라
+            cards: [...list.cards, newCard],
+          };
+        } else {
+          return list;
+        }
+      });
+      return newState;
+    },
+  },
+  
   initialState
 
 );
