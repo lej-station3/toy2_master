@@ -1,18 +1,19 @@
 import { createAction, handleActions } from 'redux-actions';
+import produce from 'immer';
 
 // //리스트 액션 타입 설정
 
 const INSERTLIST = 'todobutton/INSERTLIST';
 const CHANGE_LIST = 'todobutton/CHANGE_LIST';
 const INSERTCARD = 'todobutton/INSERTCARD';
-const CHANGECARD = 'todocard/CHANGECARD';
+
 
 //액션 생성해주고
 
 export const insertList = createAction(INSERTLIST);
 export const changeList = createAction(CHANGE_LIST)
 export const insertCard = createAction(INSERTCARD);
-export const changecard = createAction(CHANGECARD);
+
 
 
 let listID = 3;
@@ -69,68 +70,39 @@ const initialState = [
 
 export default handleActions(
   {
-  //   [INSERTLIST]: (state, action) => {
-  //     const newList = {
-  //       title: action.payload,
-  //       card: [],
-  //       id: listID,
-  //     };
-  //     listID += 1;
-  //     return [...state, newList];
-  //   },
     [CHANGE_LIST]: (state, action) => {
       return action.payload;
     },
+    
+  //   [INSERTCARD]: (state, action) => {
+  //     console.warn(action);
+  //     const newCard = {
+  //       id: cardID,
+  //       text: action.payload.text,
+  //     };
+  //     cardID += 1;
 
-    [CHANGECARD]: (state,action) => {
-      const changeList = {
-        title: '',
-        card: [],
-        id:listID,
-      };
-      listID +=1;
-
-      const newChange = state.map(card => {
-        if(card.listID !== action.payload.listID){
-          //카드의 listID를 바꿔줘라
-        }else{
-          return card;
-        }
-      });
-      return newChange;
-      
-    },
-
-    //액션페이로드정해주고
-    [INSERTCARD]: (state, action) => {
-      console.warn(action);
-      const newCard = {
-        id: cardID,
-        text: action.payload.text,
-      };
-      cardID += 1;
-
-      //초기값 돌면서 list.id가 액션들어온 listID랑 동일하면 넣어준드아아아
-      const newState = state.map(list => {
-        if (list.id === action.payload.listID) {
-          return {
-            ...list,
-            //기존 카드 뒤에 새로운 카드를 붙여라
-            cards: [...list.cards, newCard],
-          };
-        } else {
-          return list;
-        }
-      });
-      return newState;
-    },
-  },
+  //     //초기값 돌면서 list.id가 액션들어온 listID랑 동일하면 넣어준드아아아
+  //     const newState = state.map(list => {
+  //       if (list.id === action.payload.listID) {
+  //         return {
+  //           ...list,
+  //           //기존 카드 뒤에 새로운 카드를 붙여라
+  //           cards: [...list.cards, newCard],
+  //         };
+  //       } else {
+  //         return list;
+  //       }
+  //     });
+  //     return newState;
+  //   },
+  // },
+  [INSERTCARD] : (state,action) => {
+    const newState = 
+  }
+    
   initialState
 
 );
 
-
-
-//상태 변경 함수가 필요하다
-//그걸 리스트 함수로 만들어주기 
 

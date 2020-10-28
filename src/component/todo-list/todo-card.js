@@ -38,26 +38,26 @@ function TodoCard({ card,listID }) {
   const [open, setOpen] = useState(true);
 
   const ChangeType = (cardId,nextId) => {
-    console.log(nextId)
+    console.log(nextId);
     const nextState = produce(list,draft => {
       //지금 listID가 무엇인지 알아본다 
       const idx = draft.findIndex(item => item.id === listID);
-      //자기므 card.id가 먼지 알아본다 
+      //자기의 card.id가 먼지 알아본다 
       const cardIdx = draft[idx].cards.findIndex(card => card.id === cardId);
       console.log('cardIdx',cardIdx);
+      //변경하려고 하는 넥스트 아이디가 무엇인지 알아본다 string과 숫자 차이가 있는게 문제 
       const nextIdx = draft.findIndex(item => item.id === nextId);
       console.log('nextIdx',nextIdx);
+      //현재설정된카드 
       const card = draft[idx].cards[cardIdx];
       console.log('card',card, idx);
+      //그 카드를 다시 넣어준다 
       draft[nextIdx].cards.push(card);
       draft[idx].cards.splice(cardIdx,1);
     });
-
     console.log(nextState);
     dispatch(changeList(nextState));
-
   };
-
 
   return (
     <Card>
@@ -65,6 +65,7 @@ function TodoCard({ card,listID }) {
       <span className="icon">
         {open ? (
           <SwapSvg onClick={() => setOpen(false)} width="25" />) :
+          //여기서 listID가 들어가면 안되는거임 
           <select value={listID} onChange={e => ChangeType(card.id, +e.currentTarget.value)}>
           
             {list.map(item => {
@@ -77,10 +78,7 @@ function TodoCard({ card,listID }) {
           </select>
         }
       </span>
-
     </Card>
-
-
   );
 }
 export default TodoCard;
