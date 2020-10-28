@@ -20,14 +20,19 @@ const List = styled.div`
 
 
 //리스트 큰 창을 만들자
-function TodoList({ data, listID }) {
+function TodoList({ data, listID,cardID }) {
   const { title, cards } = data;
 
   return (
     <List>
       <h5>{title}</h5>
       {cards.map(card => (
-        <TodoCard key={card.id} text={card.text} />
+        <TodoCard 
+          listID={listID} 
+          cardID={cardID}
+          key={card.id} 
+          card={card} 
+        />
       ))}
       <TodoButtonWrapper listID={listID} />
     </List>

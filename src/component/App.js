@@ -13,15 +13,18 @@ const GlobalStyle = createGlobalStyle`
   body{
     background-color:#f2f2f2;
   }
-  `;
+`;
+
+const AppWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 function App() {
   const { list } = useSelector(state => state);
 
-  const AppWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-  `;
 
+  console.log('list', list);
   return (
     <>
       <GlobalStyle />
@@ -29,7 +32,7 @@ function App() {
       {/* 바로 보내주면 에러남  */}
       <AppWrapper>
         {list.map(data => (
-          <TodoList listID={data.id} key={data.id} data={data} />
+          <TodoList  listID={data.id} key={data.id} data={data} />
         ))}
       </AppWrapper>
     </>

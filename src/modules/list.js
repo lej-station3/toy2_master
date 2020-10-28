@@ -3,12 +3,14 @@ import { createAction, handleActions } from 'redux-actions';
 // //리스트 액션 타입 설정
 
 const INSERTLIST = 'todobutton/INSERTLIST';
+const CHANGE_LIST = 'todobutton/CHANGE_LIST';
 const INSERTCARD = 'todobutton/INSERTCARD';
 const CHANGECARD = 'todocard/CHANGECARD';
 
 //액션 생성해주고
 
 export const insertList = createAction(INSERTLIST);
+export const changeList = createAction(CHANGE_LIST)
 export const insertCard = createAction(INSERTCARD);
 export const changecard = createAction(CHANGECARD);
 
@@ -76,6 +78,10 @@ export default handleActions(
   //     listID += 1;
   //     return [...state, newList];
   //   },
+    [CHANGE_LIST]: (state, action) => {
+      return action.payload;
+    },
+
     [CHANGECARD]: (state,action) => {
       const changeList = {
         title: '',
