@@ -58,6 +58,7 @@ function TodoCard({ card,listID }) {
     console.log(nextState);
     dispatch(changeList(nextState));
   };
+  
 
   return (
     <Card>
