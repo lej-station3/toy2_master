@@ -1,24 +1,18 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 
-// //리스트 액션 타입 설정
-
-const INSERTLIST = 'todobutton/INSERTLIST';
+///리스트 액션 타입 설정
+const INSERT_LIST = 'todobutton/INSERTLIST';
 const CHANGE_LIST = 'todobutton/CHANGE_LIST';
-const INSERTCARD = 'todobutton/INSERTCARD';
-
+const INSERT_CARD = 'todobutton/INSERTCARD';
 
 //액션 생성해주고
-
-export const insertList = createAction(INSERTLIST);
-export const changeList = createAction(CHANGE_LIST)
-export const insertCard = createAction(INSERTCARD);
-
-
+export const insertList = createAction(INSERT_LIST);
+export const changeList = createAction(CHANGE_LIST);
+export const insertCard = createAction(INSERT_CARD);
 
 let listID = 3;
 let cardID = 2;
-
 
 //초기값만들고
 const initialState = [
@@ -67,39 +61,43 @@ const initialState = [
 ];
 
 //리듀서만들기
-
 export default handleActions(
   {
+    [INSERT_LIST] : (state,action) => {
+      console.warn('action');
+      const newList = {
+        title:action.payload,
+        card:[],
+        id:listID
+      };
+      listID += 1;
+      return [...state,newList];
+    },
+  
     [CHANGE_LIST]: (state, action) => {
       return action.payload;
     },
-    
-    [INSERTCARD]: (state, action) => {
+
+    [INSERT_CARD]: (state, action) => {
       console.warn(action);
       const newCard = {
         id: cardID,
         text: action.payload.text,
       };
       cardID += 1;
-
-      //초기값 돌면서 list.id가 액션들어온 listID랑 동일하면 넣어준드아아아
-      const newState = state.map(list => {
-        if (list.id === action.payload.listID) {
-          return {
-            ...list,
-            //기존 카드 뒤에 새로운 카드를 붙여라
-            cards: [...list.cards, newCard],
-          };
-        } else {
-          return list;
-        }
+      //state 현재값, draft 이제 바뀔값, 그래서 draft.map으로 해줘야 하는거임!!
+      const newState = produce(state, draft => { 
+        draft.map(list => {
+          if(list.id === action.payload.listID) {
+            return {
+              cards: list.cards.push(newCard),
+            };
+          } 
+        });  
       });
       return newState;
-    },
+    }, 
   },
-  
   initialState
-
 );
-
 

@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import produce from 'immer';
 import { Card,Select } from './card-styled.js';
-
-
 import { ReactComponent as SwapSvg } from './images/swap.svg';
 import { changeList } from '../../modules/list';
-
-
 
 function TodoCard({ card,listID }) {
   const { list } = useSelector(state => state);
@@ -35,8 +31,6 @@ function TodoCard({ card,listID }) {
     console.log(nextState);
     dispatch(changeList(nextState));
   };
-
-
   return (
     <Card>
       <h5>{card.text}</h5>

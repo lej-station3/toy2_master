@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { insertCard } from '../../modules/list';
-import { Button,InputSet,ButtonWrapper } from './styled.js';
+import { CardButton,InputSet,ButtonWrapper } from './styled.js';
 
-
-
-function TodoButton({ setOpen, listID }) {
-  console.log('listID', listID);
+function TodoButton({ data, setOpen, listID }) {
   const dispatch = useDispatch();
   const [text, setText] = useState('');
 
   const handleEnter = e => {
     e.preventDefault();
-    handleinsertCard(text);
+    handleInsertCard(text);
     setOpen(false);
-  };
+  };  
 
   const handleChange = e => {
     console.log('할 일', e.currentTarget.value);
@@ -22,41 +19,51 @@ function TodoButton({ setOpen, listID }) {
   };
 
   //여기서 ListID를 빼주는 게 관건이었다...
-  const handleinsertCard = text => {
-    console.log('text', listID, text);
+  const handleInsertCard = text => {
+    console.log('cardtext', listID, text);
     if (text) {
       dispatch(insertCard({ listID, text }));
       setText('');
     }
   };
 
-  
   return (
     <InputSet>
-      <textarea onChange={handleChange} value={text} />
+      <input type="text" onChange={handleChange} value={text} />
       <ButtonWrapper>
-        <button onClick={handleEnter}>+</button>
-        <button onClick={() => setOpen(false)}>x</button>
+        <button onClick={handleEnter}> Add </button>
+        <button onClick={() => setOpen(false)}> X </button>
       </ButtonWrapper>
-    
     </InputSet>
   );
 }
 
-
-
-function TodoButtonWrapper({ listID }) {
+function TodoButtonWrapper({ listID,data }) {
   const [open, setOpen] = useState(false);
-  //지워지는 함수 false면 지워라
+
   return (
-    <Button>
+    <CardButton>
       {open ? (
-        <TodoButton listID={listID} setOpen={setOpen} />
+        <TodoButton data = {data} listID={listID} setOpen={setOpen} />
       ) : (
         <p onClick={() => setOpen(!open)}>Add a Card</p>
       )}
-    </Button>
+    </CardButton>
   );
 }
-
 export default TodoButtonWrapper;
+
+
+
+
+// const handleListEnter = e => {
+//   e.preventDefault();
+//   handleInsertList(text);
+//   setOpen(false);
+// };  
+
+// const handleInsertList = text => {
+//   if(text) {
+//     dispatch(insertList({ listID, text }));
+//   }
+// };
