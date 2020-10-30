@@ -29,7 +29,7 @@ function TodoButton({ data, setOpen, listID }) {
 
   return (
     <InputSet>
-      <input type="text" onChange={handleChange} value={text} />
+      <textarea type="text" onChange={handleChange} value={text} />
       <ButtonWrapper>
         <button onClick={handleEnter}> Add </button>
         <button onClick={() => setOpen(false)}> X </button>

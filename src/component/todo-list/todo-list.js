@@ -1,7 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import TodoCard from './todo-card';
 import TodoButtonWrapper from '../todo-button/todo-button-wrapper';
-import styled from 'styled-components';
 
 
 const List = styled.div`
@@ -18,20 +18,19 @@ const List = styled.div`
 `;
 
 //리스트 큰 창을 만들자
-function TodoList({ data, listID,cardID }) {
+function TodoList({ data }) {
   const { title, cards } = data;
   return (
     <List>
       <h5>{title}</h5>
       {cards.map(card => (
         <TodoCard 
-          listID={listID} 
-          cardID={cardID}
+          listID={data.id} 
           key={card.id} 
           card={card} 
         />
       ))}
-      <TodoButtonWrapper listID={listID}/>
+      <TodoButtonWrapper listID={data.id}/>
 
     </List>
   );

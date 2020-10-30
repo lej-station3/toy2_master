@@ -13,23 +13,20 @@ export const Card = styled.div`
   &:hover{
     background-color: ${lighten('0.1', '#8C2703')} ;
   }
-  h5{
+
+  p{
+    /* 넘치지 않도록 영역을 세워주고 word-break를 통해서 글자가 내려앉도록 한다 */
+    padding-right:50px;
+    padding-left:25px;
     text-align:center;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+    word-break:break-all;
     color: #fff;
   }
+
   .icon{
     position:absolute;
-    right:10px;
+    right:20px;
   }
-  /* .icon{
-    opacity:0; 
-    &:hover{
-    opacity:1;
-    }
-  } */
 `;
 
 export const Select = styled.div`

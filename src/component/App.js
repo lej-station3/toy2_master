@@ -21,6 +21,7 @@ const AppWrapper = styled.div`
 `;
 
 function App() {
+  // const { list } = useSelector(state => ({list:state.list}))
   const { list } = useSelector(state => state);
 
   console.log('list', list);
@@ -32,7 +33,8 @@ function App() {
   
       <AppWrapper>
         {list.map(data => (
-          <TodoList  listID={data.id} key={data.id} data={data} />
+          // listID만 따로 보내 줄 필요 없음 data로 통일 
+          <TodoList key={data.id} data={data} />
         ))}
       </AppWrapper>
       {/* <TodoListButton/> */}

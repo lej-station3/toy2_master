@@ -13,10 +13,13 @@ export const CardButton = styled.div`
 `;
 
 export const InputSet = styled.div`
-input{
+textarea{
+  /* textarea에 있는 문제를 해결해줌 */
+  resize:none;
   width: 100%;
   height: 73.44px;
   padding: 0;
+  padding-top:10px;
   color: #fff;
   text-decoration: none;
   font-size: 20px;
