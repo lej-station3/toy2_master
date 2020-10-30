@@ -3,6 +3,7 @@ import TodoCard from './todo-card';
 import TodoButtonWrapper from '../todo-button/todo-button-wrapper';
 import styled from 'styled-components';
 
+
 const List = styled.div`
   width: 300px;
   margin-right: 30px;
@@ -30,7 +31,8 @@ function TodoList({ data, listID,cardID }) {
           card={card} 
         />
       ))}
-      <TodoButtonWrapper listID={listID}  />
+      <TodoButtonWrapper listID={listID}/>
+
     </List>
   );
 }

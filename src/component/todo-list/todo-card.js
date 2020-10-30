@@ -12,23 +12,15 @@ function TodoCard({ card,listID }) {
 
   const ChangeType = (cardId,nextId) => {
     console.log(nextId);
-    const nextState = produce(list,draft => {
-      //지금 listID가 무엇인지 알아본다 
+    const nextState = produce(list,draft => { 
       const idx = draft.findIndex(item => item.id === listID);
-      //자기의 card.id가 먼지 알아본다 
       const cardIdx = draft[idx].cards.findIndex(card => card.id === cardId);
-      console.log('cardIdx',cardIdx);
       //변경하려고 하는 넥스트 아이디가 무엇인지 알아본다 string과 숫자 차이가 있는게 문제 
       const nextIdx = draft.findIndex(item => item.id === nextId);
-      console.log('nextIdx',nextIdx);
-      //현재설정된카드 
       const card = draft[idx].cards[cardIdx];
-      console.log('card',card, idx);
-      //그 카드를 다시 넣어준다 
       draft[nextIdx].cards.push(card);
       draft[idx].cards.splice(cardIdx,1);
     });
-    console.log(nextState);
     dispatch(changeList(nextState));
   };
   return (

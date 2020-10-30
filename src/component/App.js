@@ -3,7 +3,7 @@ import TodoList from '../component/todo-list/todo-list';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
-import TodoListButton from './todo-button/todo-list-button';
+// import TodoListButton from './todo-button/todo-list-button';
 
 const GlobalStyle = createGlobalStyle`
   html{
@@ -29,13 +29,15 @@ function App() {
       <GlobalStyle />
       <h2>Trello</h2>
       {/* 바로 보내주면 에러남  */}
+  
       <AppWrapper>
         {list.map(data => (
           <TodoList  listID={data.id} key={data.id} data={data} />
         ))}
       </AppWrapper>
-      <TodoListButton/>
+      {/* <TodoListButton/> */}
     </>
   );
 }
 export default App;
+

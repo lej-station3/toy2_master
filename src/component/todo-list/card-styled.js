@@ -5,6 +5,7 @@ export const Card = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position:relative;
   margin-bottom: 7px;
   color: #fff;
   font-size: 16px;
@@ -13,7 +14,6 @@ export const Card = styled.div`
     background-color: ${lighten('0.1', '#8C2703')} ;
   }
   h5{
-    width:150px;
     text-align:center;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -21,11 +21,15 @@ export const Card = styled.div`
     color: #fff;
   }
   .icon{
+    position:absolute;
+    right:10px;
+  }
+  /* .icon{
     opacity:0; 
     &:hover{
     opacity:1;
     }
-  }
+  } */
 `;
 
 export const Select = styled.div`
