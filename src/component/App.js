@@ -29,15 +29,12 @@ function App() {
     <>
       <GlobalStyle />
       <h2>Trello</h2>
-      {/* 바로 보내주면 에러남  */}
-  
       <AppWrapper>
         {list.map(data => (
           // listID만 따로 보내 줄 필요 없음 data로 통일 
-          <TodoList key={data.id} data={data} />
+          <TodoList listID={data.id} key={data.id} data={data} />
         ))}
       </AppWrapper>
-      {/* <TodoListButton/> */}
     </>
   );
 }

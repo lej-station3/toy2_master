@@ -1,49 +1,54 @@
-import React, { useState } from 'react';
-import { Card,Select } from './card-styled.js';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReactComponent as SwapSvg } from './images/swap.svg';
-import produce from 'immer';
-import { changeList } from '../../modules/list';
+import React,{ useRef } from 'react';
+import { Card } from './card-styled.js';
+import { useDrop,useDrag } from 'react-dnd';
+import { ItemTypes } from '../ItemTypes.js';
 
-function TodoCard({ card,listID }) {
-  const { list } = useSelector(state => state);
-  const dispatch = useDispatch();
-  const [open, setOpen] = useState(true);
-
-  const changeType = e => {
-    const { value:nextId } = e.currentTarget;
-    const nextState = produce(list,draft => { 
-      const idx = draft.findIndex(item => item.id === listID);
-      const cardIdx = draft[idx].cards.findIndex(newCard => newCard.id === card.id);
-      //변경하려고 하는 넥스트 아이디가 무엇인지 알아본다 string과 숫자 차이가 있는게 문제 
-      const nextIdx = draft.findIndex(item => item.id === +nextId);
-      const cardChange = draft[idx].cards[cardIdx];
-      draft[nextIdx].cards.push(cardChange);
-      draft[idx].cards.splice(cardIdx,1);
-    });
-    dispatch(changeList(nextState));
-  };
+function TodoCard({ card,index,moveCard }) {
+  const ref = useRef(null);
+  //드래그 하는 상태에 필요한 거 
+  const [,drop] = useDrop({
+    accept:ItemTypes.CARD,
+    //해도 되고 안해도댐
+    // 항목이 구성 요소 위에 놓이면 호출 
+    hover(item,monitor) {
+      if(!ref.current){
+        return;
+      }
+      const dragIndex = item.index;
+      const hoverIndex = index;
+      //서로 섞이지 않도록 해주는 거 
+      if(dragIndex === hoverIndex) {
+        return;
+      }
+      // 크기 알려주는 함수
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      //bottm - top하면 딱 엘리먼트 세로 크기 나온당
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      //드래그 하고 마우스 마지막 기록
+      const clientOffset = monitor.getClientOffset(); 
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      if(dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY){
+        return;
+      }
+      moveCard(dragIndex,hoverIndex);
+      item.index = hoverIndex;
+    },
+  });
+  //isDragging은 드래그 시작하면 알려줌
+  const [{ isDragging }, drag] = useDrag({
+    item:{ type:ItemTypes.CARD,id:card.id,index },
+    collect: monitor => ({
+      isDragging:monitor.isDragging(),
+    }),
+  });
+  const opacity = isDragging ? 0 :1;
+  drag(drop(ref));
   return (
-    <Card>
+    <Card ref={ref} style={{ opacity }}>
       <p>{card.text}</p>
-      <span className="icon">
-        {open ? (
-          <SwapSvg onClick={() => setOpen(false)} width="25" />) :
-          //여기서 listID가 들어가면 안되는거임 
-          <Select>
-            {/* <select value={listID} onChange={e => ChangeType(card.id, +e.currentTarget.value)}> */}
-            <select value={listID} onChange={changeType}>
-              {list.map(item => {
-                return(
-                  <option key={item.id} value={item.id}>
-                    {item.title}
-                  </option>
-                );
-              })}
-            </select>          
-          </Select>
-        }
-      </span>
     </Card>
   );
 }

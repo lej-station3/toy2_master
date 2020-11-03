@@ -62,11 +62,15 @@ const initialState = [
 export default handleActions(
   {
     [CHANGE_LIST]: (state, action) => {
-      return action.payload;
+      const newCard = state[action.payload.listID].cards[action.payload.dragIndex];
+      const newState = produce(state,draft =>{
+        draft[action.payload.listID].cards.splice(action.payload.dragIndex,1);
+        draft[action.payload.listID].cards.splice(action.payload.hoverIndex,0,newCard);
+      });  
+      return newState;
     },
 
     [INSERT_CARD]: (state, action) => {
-      console.warn(action);
       const newCard = {
         id: cardID,
         text: action.payload.text,
@@ -87,3 +91,10 @@ export default handleActions(
   },
   initialState
 );
+
+
+// const newState = produce(state,draft => {
+//   const dragCard = state[action.payload.listID];
+//   draft.splice(dragIndex,1);
+//   draft.splice(hoverIndex,0,dragCard);
+// })
