@@ -35,39 +35,44 @@ button{
 `;
 
 
-function TitleInput({ title,setTitle,setOpen }){
+function TitleInput({ setOpen }){
+  const [listTitle, setListTitle] = useState('');
   const dispatch = useDispatch();
 
   const changeTitle = e => {
-    console.log('리스트타이틇', e.currentTarget.value);
-    setTitle(e.currentTarget.value);
+    setListTitle(e.currentTarget.value);
+  };
+  const handleEnter = e => {
+    e.preventDefault();
+    handleInsetList(listTitle);
+    setOpen(false);
   };
 
-  const handleInsetList = title => {
-    if(title) {
-      dispatch(insertList(title));
+  const handleInsetList = listTitle => {
+    if(listTitle) {
+      dispatch(insertList(listTitle));
+      setListTitle(''); 
+      console.log('리스트타이틇', listTitle);
     }
   };
-
-
   return(
     <Input>
-      <input  onChange={changeTitle} value={title} />
+      <input  onChange={changeTitle} value={listTitle} />
       <InputButton>
-        <button onClick={handleInsetList}> Add </button>
-        <button onClick={() => setOpen(false)}> X </button>
+        <button  onClick={handleEnter}> Add </button>
+        <button  onClick={() => setOpen(false)}> X </button>
       </InputButton>
     </Input>
   );
 }
 
-function TodoListButton() {
+function TodoListButton( ) {
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState('');
+
   return(
     <Title>
       { open ? (
-        <TitleInput title={title} setTitle={setTitle} setOpen={setOpen} / >
+        <TitleInput setOpen={setOpen} / >
       ): (<button onClick={() => setOpen(!open)}> 
         Add a List </button>
       )}

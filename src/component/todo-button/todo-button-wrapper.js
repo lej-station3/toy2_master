@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { insertCard } from '../../modules/list';
 import { CardButton,InputSet,ButtonWrapper } from './styled.js';
 
-function TodoButton({ data, setOpen, listID }) {
+function TodoButton({ setOpen, listID }) {
   const dispatch = useDispatch();
   const [text, setText] = useState('');
 
@@ -38,13 +38,13 @@ function TodoButton({ data, setOpen, listID }) {
   );
 }
 
-function TodoButtonWrapper({ listID,data }) {
+function TodoButtonWrapper({ listID }) {
   const [open, setOpen] = useState(false);
 
   return (
     <CardButton>
       {open ? (
-        <TodoButton data = {data} listID={listID} setOpen={setOpen} />
+        <TodoButton listID={listID} setOpen={setOpen} />
       ) : (
         <p onClick={() => setOpen(!open)}>Add a Card</p>
       )}

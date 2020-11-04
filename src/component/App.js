@@ -1,9 +1,11 @@
 import React from 'react';
 import TodoList from '../component/todo-list/todo-list';
+import TodoListButton from '../component/todo-button/todo-list-button';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
-// import TodoListButton from './todo-button/todo-list-button';
+
+
 
 const GlobalStyle = createGlobalStyle`
   html{
@@ -34,7 +36,8 @@ function App() {
           // listID만 따로 보내 줄 필요 없음 data로 통일 
           <TodoList listID={data.id} key={data.id} data={data} />
         ))}
-      </AppWrapper>
+        < TodoListButton />
+      </AppWrapper >
     </>
   );
 }

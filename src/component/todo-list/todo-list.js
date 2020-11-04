@@ -20,7 +20,6 @@ li{
 }
 `;
 
-
 //리스트 큰 창을 만들자
 function TodoList({ data,listID }) {
   const dispatch = useDispatch();
@@ -28,8 +27,6 @@ function TodoList({ data,listID }) {
   const moveCard = (dragIndex,hoverIndex) => {
     dispatch(changeList({ dragIndex,hoverIndex,listID }));
   };  
-  
-
   return (
     <List>
       <h5>{title}</h5>

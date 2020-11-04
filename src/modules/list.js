@@ -2,10 +2,12 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 
 ///리스트 액션 타입 설정
+const INSERT_LIST = 'todolistbutton/INSERT_LIST';
 const CHANGE_LIST = 'todobutton/CHANGE_LIST';
 const INSERT_CARD = 'todobutton/INSERTCARD';
 
 //액션 생성해주고
+export const insertList = createAction(INSERT_LIST);
 export const changeList = createAction(CHANGE_LIST);
 export const insertCard = createAction(INSERT_CARD);
 
@@ -61,11 +63,24 @@ const initialState = [
 //리듀서만들기
 export default handleActions(
   {
+    [INSERT_LIST] : (state,action) => {
+      const newList = {
+        title:action.payload,
+        cards:[],
+        id:listID
+      };
+      listID +=1;
+      const newState = produce(state,draft => { 
+        draft.push(newList);
+      });
+      return newState;
+    },
+
     [CHANGE_LIST]: (state, action) => {
-      const newCard = state[action.payload.listID].cards[action.payload.dragIndex];
+      const dragCard = state[action.payload.listID].cards[action.payload.dragIndex];
       const newState = produce(state,draft =>{
         draft[action.payload.listID].cards.splice(action.payload.dragIndex,1);
-        draft[action.payload.listID].cards.splice(action.payload.hoverIndex,0,newCard);
+        draft[action.payload.listID].cards.splice(action.payload.hoverIndex,0,dragCard);
       });  
       return newState;
     },
