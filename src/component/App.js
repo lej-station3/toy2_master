@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TodoList from '../component/todo-list/todo-list';
 import TodoListButton from '../component/todo-button/todo-list-button';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
-
+import produce from 'immer';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   body{
-    background-color:#f2f2f2;
+    background-color: #f2f2f2;
   }
 `;
 const AppWrapper = styled.div`
@@ -25,19 +25,35 @@ const AppWrapper = styled.div`
 function App() {
   // const { list } = useSelector(state => ({list:state.list}))
   const { list } = useSelector(state => state);
+  const [dropBoxNames,setDropBoxNames] = useState([]);
+
+  function isDropped(boxName){
+    return dropBoxNames.indexOf(boxName) > -1;
+  }
+  
+  const handleDrop =  (index,item) => {
+ 
+   
+  };
+  
 
   console.log('list', list);
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle/>
       <h2>Trello</h2>
       <AppWrapper>
-        {list.map(data => (
+        {list.map((data,index) => (
           // listID만 따로 보내 줄 필요 없음 data로 통일 
-          <TodoList listID={data.id} key={data.id} data={data} />
+          <TodoList 
+            // onDrop={item => handleDrop(index, item)}
+            listID={data.id} 
+            key={index} 
+            data={data}     
+          />
         ))}
         < TodoListButton />
-      </AppWrapper >
+      </AppWrapper >   
     </>
   );
 }

@@ -38,7 +38,7 @@ function TodoButton({ setOpen, listID }) {
   );
 }
 
-function TodoButtonWrapper({ listID }) {
+function TodoCardButton({ listID }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -51,19 +51,5 @@ function TodoButtonWrapper({ listID }) {
     </CardButton>
   );
 }
-export default TodoButtonWrapper;
+export default TodoCardButton;
 
-
-
-
-// const handleListEnter = e => {
-//   e.preventDefault();
-//   handleInsertList(text);
-//   setOpen(false);
-// };  
-
-// const handleInsertList = text => {
-//   if(text) {
-//     dispatch(insertList({ listID, text }));
-//   }
-// };

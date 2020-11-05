@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
+
 
 export const Card = styled.div`
   display: flex;
@@ -9,10 +9,7 @@ export const Card = styled.div`
   margin-bottom: 7px;
   color: #fff;
   font-size: 16px;
-  background-color: #8C2703;
-  &:hover{
-    background-color: ${lighten('0.1', '#8C2703')} ;
-  }
+  border-bottom: 1px solid #fff;
 
   p{
     /* 넘치지 않도록 영역을 세워주고 word-break를 통해서 글자가 내려앉도록 한다 */

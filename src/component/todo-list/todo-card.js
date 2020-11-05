@@ -8,7 +8,7 @@ function TodoCard({ card,index,moveCard }) {
   //드래그 하는 상태에 필요한 거 
   const [,drop] = useDrop({
     accept:ItemTypes.CARD,
-    //해도 되고 안해도댐
+    
     // 항목이 구성 요소 위에 놓이면 호출 
     hover(item,monitor) {
       if(!ref.current){

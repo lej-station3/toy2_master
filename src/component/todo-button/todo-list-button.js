@@ -5,15 +5,16 @@ import { insertList } from '../../modules/list.js';
 
 const Title = styled.div`
 button{
-    padding:5px;
+    padding:10px;
     border: none;
     border-radius:3px;
     text-decoration: none;
     font-size:20px;
-    color:#fff;
+    color:#55967e;
     box-shadow: none;
     outline: none;
-    background: #8C2703;
+    border: 1px solid #55967e;
+    opacity:0.6;
 }
 
 `;
@@ -21,19 +22,25 @@ const Input = styled.div`
   border: none;
   outline: none;
   box-shadow: none;
-
-`;
-const InputButton = styled.div`
-button{
+  color:#263959;
+  input{
+    background: none;
+    border:none;
+    box-shadow: none;
+    outline: none;
+    text-decoration:none;
+    border-bottom:2px solid #55967e;
+  }
+  button{
   margin-top:5px;
   margin-left:5px;
+  font-size:15px;
   font-weight:600;
-  color:#8C2703;
+  color: #55967e;
   background:none;
+  border:none;
 }
-
 `;
-
 
 function TitleInput({ setOpen }){
   const [listTitle, setListTitle] = useState('');
@@ -58,10 +65,10 @@ function TitleInput({ setOpen }){
   return(
     <Input>
       <input  onChange={changeTitle} value={listTitle} />
-      <InputButton>
-        <button  onClick={handleEnter}> Add </button>
-        <button  onClick={() => setOpen(false)}> X </button>
-      </InputButton>
+    
+      <button  onClick={handleEnter}> Add </button>
+      <button  onClick={() => setOpen(false)}> X </button>
+ 
     </Input>
   );
 }

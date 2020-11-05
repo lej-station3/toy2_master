@@ -1,35 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
 import TodoCard from './todo-card';
-import TodoButtonWrapper from '../todo-button/todo-button-wrapper';
+import TodoButtonWrapper from '../todo-button/todo-card-button';
 import { useDispatch } from 'react-redux';
-import { changeList } from '../../modules/list';
+import { changeCard } from '../../modules/list';
+
 
 const List = styled.div`
   width: 300px;
   margin-right: 30px;
-  background-color: #BF8563;  
+  background-color: #55967e;  
   border-radius: 10px;
-  h5{
-  font-weight: 600;
-  text-align: center;
-  font-size: 16px;
-}
-li{
-  list-style: none;
+  h2{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:50px;
+    background-color:#fff;
+    color:#263959;
+    font-size: 20px;
 }
 `;
 
-//리스트 큰 창을 만들자
-function TodoList({ data,listID }) {
+function TodoList({ data,listID,onDrop }) {
   const dispatch = useDispatch();
   const { title, cards } = data;
+ 
+  
+
   const moveCard = (dragIndex,hoverIndex) => {
-    dispatch(changeList({ dragIndex,hoverIndex,listID }));
+    dispatch(changeCard({ dragIndex,hoverIndex,listID }));
   };  
+
+
   return (
     <List>
-      <h5>{title}</h5>
+      <h2>{title}</h2>
       {cards.map( (card,index) => {
         return(
           <TodoCard 
@@ -37,11 +43,14 @@ function TodoList({ data,listID }) {
             index={index} 
             card={card} 
             moveCard={moveCard}
+            onDrop={onDrop}
           />
         );
       })}
       <TodoButtonWrapper listID={data.id}/>
     </List>
+
   );
 }
+
 export default TodoList;
