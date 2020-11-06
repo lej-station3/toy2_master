@@ -1,15 +1,14 @@
-import React,{ useRef } from 'react';
+import React,{useRef} from 'react';
 import { Card } from './card-styled.js';
 import { useDrop,useDrag } from 'react-dnd';
 import { ItemTypes } from '../ItemTypes.js';
 
-function TodoCard({ card,index,moveCard }) {
+function TodoCard({ card,index,moveCard,listID }) {
   const ref = useRef(null);
-  //드래그 하는 상태에 필요한 거 
+  //여기서 drop은 드롭 타겟에 부분에 .. 커넥터 기능 
   const [,drop] = useDrop({
     accept:ItemTypes.CARD,
-    
-    // 항목이 구성 요소 위에 놓이면 호출 
+    // 항목이 구성 요소 위에 놓이면 호출. 드래그 한 뒤 어떻게 해줄 것이냐  
     hover(item,monitor) {
       if(!ref.current){
         return;
@@ -44,8 +43,8 @@ function TodoCard({ card,index,moveCard }) {
       isDragging:monitor.isDragging(),
     }),
   });
-  const opacity = isDragging ? 0 :1;
   drag(drop(ref));
+  const opacity = isDragging ? 0 :1;
   return (
     <Card ref={ref} style={{ opacity }}>
       <p>{card.text}</p>

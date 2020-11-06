@@ -25,16 +25,26 @@ const AppWrapper = styled.div`
 function App() {
   // const { list } = useSelector(state => ({list:state.list}))
   const { list } = useSelector(state => state);
-  const [dropBoxNames,setDropBoxNames] = useState([]);
+  // const [dropBoxNames,setDropBoxNames] = useState([]);
 
-  function isDropped(boxName){
-    return dropBoxNames.indexOf(boxName) > -1;
-  }
+  // function isDropped(boxName){
+  //   return dropBoxNames.indexOf(boxName) > -1;
+  // }
   
-  const handleDrop =  (index,item) => {
- 
+  // const handleDrop =  (index,item) => {
+  //   const { name } = item;
+  //   setDropBoxNames(produce(dropBoxNames,draft => {
+  //     if(dropBoxNames,name){
+  //       return(
+  //         draft.push([name])
+  //       );
+  //     }else{
+  //       draft.push([]);
+  //     }
+  //   }));
+    
    
-  };
+  // };
   
 
   console.log('list', list);
@@ -46,7 +56,6 @@ function App() {
         {list.map((data,index) => (
           // listID만 따로 보내 줄 필요 없음 data로 통일 
           <TodoList 
-            // onDrop={item => handleDrop(index, item)}
             listID={data.id} 
             key={index} 
             data={data}     
