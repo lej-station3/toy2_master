@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import TodoList from '../component/todo-list/todo-list';
 import TodoListButton from '../component/todo-button/todo-list-button';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
-import produce from 'immer';
-
 
 const GlobalStyle = createGlobalStyle`
   html{
@@ -25,29 +23,7 @@ const AppWrapper = styled.div`
 function App() {
   // const { list } = useSelector(state => ({list:state.list}))
   const { list } = useSelector(state => state);
-  // const [dropBoxNames,setDropBoxNames] = useState([]);
 
-  // function isDropped(boxName){
-  //   return dropBoxNames.indexOf(boxName) > -1;
-  // }
-  
-  // const handleDrop =  (index,item) => {
-  //   const { name } = item;
-  //   setDropBoxNames(produce(dropBoxNames,draft => {
-  //     if(dropBoxNames,name){
-  //       return(
-  //         draft.push([name])
-  //       );
-  //     }else{
-  //       draft.push([]);
-  //     }
-  //   }));
-    
-   
-  // };
-  
-
-  console.log('list', list);
   return (
     <>
       <GlobalStyle/>
