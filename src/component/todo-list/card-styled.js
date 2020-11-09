@@ -1,55 +1,47 @@
 import styled from 'styled-components';
-
+import { darken } from 'polished';
 
 export const Card = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position:relative;
-  margin-bottom: 7px;
+  justify-content:space-around;
+  align-items:center;
+  width: 265px;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 10px;
+  background-color: ${darken(0.1, '#38A67E')};
+  opacity:0.8;
   color: #fff;
   font-size: 16px;
-  border-bottom: 1px solid #fff;
-
+ 
   p{
     /* 넘치지 않도록 영역을 세워주고 word-break를 통해서 글자가 내려앉도록 한다 */
-    padding-right:50px;
-    padding-left:25px;
+    padding: 30px;
     text-align:center;
+    cursor: pointer;
     word-break:break-all;
     color: #fff;
-  }
-
-  .icon{
-    position:absolute;
-    right:20px;
+    &:active{
+      padding: 30px;
+      font-weight: 600;
+    }
   }
 `;
 
-export const Select = styled.div`
-  width: 100%;
-  padding: 5px;
-  border: none;
-  border: 1px solid #000;
-  background: none;
-  opacity: 0.9;
-  color: none;
-  font-size: 16px;
-  box-shadow: none;
-  outline: none; 
-  select{
-    background: none;
-    border:none;
-    box-shadow: none;
-    outline: none;
-    text-decoration:none;
-    
+export const Icon = styled.div`
+   width:15px;
+   cursor: pointer;
+   .delIcon{
+    opacity:0.5;
+    &:hover{
+     opacity:0.9;
+   }
+  } 
+   .editIcon{
+    opacity:0.5;
+    &:hover{
+     opacity:0.9;
+   }
   }
-    option{
-      border: none;
-      color: black;
-      display:flex;
-      white-space: pre;
-      padding: 2px;
-    }
+  
 `;

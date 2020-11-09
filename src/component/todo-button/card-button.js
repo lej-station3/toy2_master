@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { insertCard } from '../../modules/list';
-import { CardButton,InputSet,ButtonWrapper } from './styled.js';
+import { CardButton,InputSet,ButtonWrapper } from './card-button-styled';
 
 function TodoButton({ setOpen, listID }) {
   const dispatch = useDispatch();

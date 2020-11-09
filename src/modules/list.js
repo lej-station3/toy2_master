@@ -4,15 +4,15 @@ import produce from 'immer';
 ///리스트 액션 타입 설정
 const INSERT_LIST = 'todolistbutton/INSERT_LIST';
 const INSERT_CARD = 'todobutton/INSERTCARD';
-const CHANGE_CARD = 'todobutton/CHANGE_CARD';
-
+const DEL_LIST = 'list/DEL_LIST';
+const DEL_CARD = 'card/DEL_CARD';
 
 
 //액션 생성해주고
 export const insertList = createAction(INSERT_LIST);
-export const insertCard = createAction(INSERT_CARD);
-export const changeCard = createAction(CHANGE_CARD);
-
+export const insertCard = createAction(INSERT_CARD);         
+export const delList = createAction(DEL_LIST);
+export const delCard = createAction(DEL_CARD);
 
 let listID = 3;
 let cardID = 2;
@@ -76,6 +76,28 @@ const initialState = [
 //리듀서만들기
 export default handleActions(
   {
+    [DEL_LIST] : (state,action) => {
+      console.warn('action',action);
+      const newState = produce( state,draft => {
+        //listID가 아니고 내가 선택한 그 지점의 id를 찾아야하니까 action.payload로 
+        const idx = draft.findIndex( list => list.id === action.payload);
+        //오브젝트 안에서 slice를 해라! 라는거라 안된거임 
+        draft.splice(idx,1);
+      });
+      return newState;
+    },
+   
+    [DEL_CARD]: (state,action) =>{
+      const newState = produce(state,draft => {
+        const idx = draft.findIndex( item => item.id === action.payload);
+        console.log('action.payload',action.payload);
+        const cardIdx = draft[idx].cards.findIndex(newCard => newCard.id === action.payload);
+        console.log('cardidx',cardIdx);
+        draft[idx].cards.splice(cardIdx,1);
+      });
+      return newState;
+    },
+
     [INSERT_LIST] : (state,action) => {
       const newList = {
         title:action.payload,

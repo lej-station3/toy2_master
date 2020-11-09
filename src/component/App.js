@@ -1,46 +1,36 @@
 import React  from 'react';
-import TodoList from '../component/todo-list/todo-list';
-import TodoListButton from '../component/todo-button/todo-list-button';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components';
+// import { createGlobalStyle } from 'styled-components';
+// import reset from 'styled-reset';
+import { GlobalStyle } from '../styles/GlobalStyles';
+import { useSelector } from 'react-redux';
+import TodoList from '../component/todo-list/list';
+import TodoListButton from '../component/todo-button/list-button';
 
-const GlobalStyle = createGlobalStyle`
-  html{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
-  body{
-    background-color: #f2f2f2;
-  }
-`;
+
 const AppWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  margin-top:30px;
 `;
 
 function App() {
-  // const { list } = useSelector(state => ({list:state.list}))
   const { list } = useSelector(state => state);
-
   return (
     <>
       <GlobalStyle/>
-      <h2>Trello</h2>
       <AppWrapper>
         {list.map((data,index) => (
           // listID만 따로 보내 줄 필요 없음 data로 통일 
           <TodoList 
-            listID={data.id} 
+            listId={data.id} 
             key={index} 
             data={data}     
           />
         ))}
-        < TodoListButton />
+        <TodoListButton />
       </AppWrapper >   
     </>
   );
 }
 export default App;
-
