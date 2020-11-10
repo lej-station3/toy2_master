@@ -76,7 +76,7 @@ const initialState = [
 //리듀서만들기
 export default handleActions(
   {
-    [DEL_LIST] : (state,action) => {
+    [DEL_LIST]: (state,action) => {
       console.warn('action',action);
       const newState = produce( state,draft => {
         //listID가 아니고 내가 선택한 그 지점의 id를 찾아야하니까 action.payload로 
@@ -89,16 +89,15 @@ export default handleActions(
    
     [DEL_CARD]: (state,action) =>{
       const newState = produce(state,draft => {
-        const idx = draft.findIndex( item => item.id === action.payload);
+        const idx = draft.findIndex( item => item.id === action.payload.parent);
         console.log('action.payload',action.payload);
-        const cardIdx = draft[idx].cards.findIndex(newCard => newCard.id === action.payload);
-        console.log('cardidx',cardIdx);
+        const cardIdx = draft[idx].cards.findIndex(card => card.id === action.payload.child);
         draft[idx].cards.splice(cardIdx,1);
       });
       return newState;
     },
 
-    [INSERT_LIST] : (state,action) => {
+    [INSERT_LIST]: (state,action) => {
       const newList = {
         title:action.payload,
         cards:[],

@@ -35,7 +35,7 @@ function TodoList({ data,listId }) {
             <TodoCard 
               key={card.id} 
               card={card}
-              cardId={card.id}
+           
               listId={listId}
             />
           );

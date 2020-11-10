@@ -10,13 +10,12 @@ function TitleInput({ setOpen }){
   const changeTitle = e => {
     setListTitle(e.currentTarget.value);
   };
-  const handleEnter = e => {
-    e.preventDefault();
+  const handleEnter = () => {
     handleInsetList(listTitle);
     setOpen(false);
   };
 
-  const handleInsetList = listTitle => {
+  const handleInsetList = () => {
     if(listTitle) {
       dispatch(insertList(listTitle));
       setListTitle(''); 
@@ -25,7 +24,7 @@ function TitleInput({ setOpen }){
   };
   return(
     <Input>
-      <input  onChange={changeTitle} value={listTitle} />
+      <input onChange={changeTitle} value={listTitle} />
       <ListBtn>
         <button  onClick={handleEnter}> Add </button>
         <button  onClick={() => setOpen(false)}> X </button>

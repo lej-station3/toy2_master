@@ -5,7 +5,7 @@ import { ReactComponent as Edit } from './images/edit.svg';
 import { useDispatch } from 'react-redux';
 import { delCard } from '../../modules/list';
 
-function TodoCard({ card,cardId, listId }) {
+function TodoCard({ card, listId }) {
   const dispatch = useDispatch();
 
   return (
@@ -14,7 +14,7 @@ function TodoCard({ card,cardId, listId }) {
       <Icon>
         <Trash 
           className="delIcon"
-          onClick={() => dispatch(delCard(listId,cardId))}/>
+          onClick={() => dispatch(delCard({ parent: listId, child: card.id }))}/>
         <Edit 
           className="editIcon"/>
       </Icon>

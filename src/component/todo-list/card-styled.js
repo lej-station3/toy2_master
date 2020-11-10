@@ -7,8 +7,8 @@ export const Card = styled.div`
   align-items:center;
   width: 265px;
   border-radius: 10px;
-  margin: 0 auto;
-  margin-top: 10px;
+  margin: 10px auto 0;
+  padding: 0 20px;
   background-color: ${darken(0.1, '#38A67E')};
   opacity:0.8;
   color: #fff;
@@ -16,6 +16,7 @@ export const Card = styled.div`
  
   p{
     /* 넘치지 않도록 영역을 세워주고 word-break를 통해서 글자가 내려앉도록 한다 */
+    flex-grow: 1;
     padding: 30px;
     text-align:center;
     cursor: pointer;
@@ -29,6 +30,7 @@ export const Card = styled.div`
 `;
 
 export const Icon = styled.div`
+   flex: none;
    width:15px;
    cursor: pointer;
    .delIcon{
